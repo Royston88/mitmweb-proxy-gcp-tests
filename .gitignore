@@ -1,0 +1,35 @@
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Proxy & Network Logs
+*.jsonl
+*.log
+logs/
+
+# Local Browser Profiles & Captures
+playwright-chromium-clean/
+.chrome-profile*
+.config/
+*.png
+*.jpg
+*.jpeg
+!images/
+!images/*
+*.html
+
+# Local Test & Documentation (Archived workflows)
+test/
+docs/
+doc/
+
+# OS & Editor Files
+.DS_Store
+.vscode/
+.idea/

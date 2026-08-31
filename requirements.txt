@@ -1,0 +1,2 @@
+mitmproxy>=10.0.0
+playwright>=1.40.0
