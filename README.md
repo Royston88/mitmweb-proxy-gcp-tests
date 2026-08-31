@@ -21,8 +21,9 @@ It demonstrates and validates:
 │   └── mermaid_sequence_diagram.png
 ├── report/                                           # Comprehensive verification report
 │   └── BigQuery_Studio_VDI_Firewall_Whitelist_and_API_Verification_Report.md
-└── scripts/                                          # Core executable scripts (4 test runners + launcher)
-    ├── launch_chromium.py                            # Standalone Playwright Chromium browser launcher
+└── scripts/                                          # Core executable scripts (4 test runners + launchers)
+    ├── launch_chromium.py                            # Playwright Chromium browser launcher
+    ├── launch_chrome.sh                              # Direct system Google Chrome launcher
     │
     ├── proxy_org_restriction.py                      # Mitmproxy addon: Injects X-Goog-Allowed-Resources
     ├── start_org_proxy.sh                            # Runner: GCP Organization Restriction proxy
@@ -144,6 +145,18 @@ This test verifies that injecting `X-GoogApps-Allowed-Domains` on `accounts.goog
 3.  **Expected Outcomes**:
     *   In **`blocked_domain`** mode: Attempting to log into a personal `@gmail.com` or unauthorized corporate account displays the Google Identity block page: *"Access blocked: Your organization has restricted access to this service"*.
     *   In **`allowed_domain`** mode: Users with `@yourcompany.com` can sign in normally.
+
+### Resetting Browser Profile & Switching Tests
+
+Browser cookies and session credentials are saved persistently under `~/.config/playwright-chromium-profile`. When switching between test suites or executing a clean sign-in test without cached credentials, reset the default profile with:
+
+```bash
+rm -rf ~/.config/playwright-chromium-profile
+```
+
+To stop any running proxy or browser process:
+* **Stop Proxy**: Press `Ctrl + C` in the proxy terminal or run `fuser -k 8080/tcp 8081/tcp`.
+* **Stop Browser**: Press `Ctrl + C` in the browser launcher terminal or simply close the browser window.
 
 ---
 

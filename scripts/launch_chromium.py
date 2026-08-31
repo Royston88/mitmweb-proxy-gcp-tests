@@ -19,6 +19,13 @@ async def main():
     # Configure display (e.g. for VNC / Cloudtop CRD environments)
     if "DISPLAY" not in os.environ:
         os.environ["DISPLAY"] = ":0"
+    if "XAUTHORITY" not in os.environ:
+        import glob
+        auth_files = glob.glob(f"/run/user/{os.getuid()}/.mutter-Xwaylandauth.*")
+        if auth_files:
+            latest_auth = max(auth_files, key=os.path.getmtime)
+            os.environ["XAUTHORITY"] = latest_auth
+            print(f"[*] Auto-detected XAUTHORITY: {latest_auth}")
     print(f"[*] Display set to: {os.environ['DISPLAY']}")
 
     proxy_server = os.environ.get("PROXY_SERVER", "http://127.0.0.1:8080")
@@ -28,17 +35,27 @@ async def main():
     default_url = f"https://console.cloud.google.com/bigquery?project={project_id}" if project_id else "https://console.cloud.google.com/bigquery"
     target_url = os.environ.get("TARGET_URL", default_url)
     
+    chrome_path = os.environ.get("CHROME_PATH") or ("/usr/bin/google-chrome" if os.path.exists("/usr/bin/google-chrome") else None)
+    if chrome_path:
+        print(f"[*] Using browser binary: {chrome_path}")
+    
     async with async_playwright() as p:
         try:
-            context = await p.chromium.launch_persistent_context(
-                user_data_dir=profile_dir,
-                headless=False,
-                args=[
+            launch_kwargs = {
+                "user_data_dir": profile_dir,
+                "headless": False,
+                "ignore_default_args": ["--enable-automation"],
+                "args": [
                     "--ignore-certificate-errors",
+                    "--disable-blink-features=AutomationControlled",
                     "--remote-debugging-port=9222"
                 ],
-                proxy={"server": proxy_server}
-            )
+                "proxy": {"server": proxy_server}
+            }
+            if chrome_path:
+                launch_kwargs["executable_path"] = chrome_path
+
+            context = await p.chromium.launch_persistent_context(**launch_kwargs)
             
             page = context.pages[0] if context.pages else await context.new_page()
             print(f"[*] Navigating to: {target_url}")
