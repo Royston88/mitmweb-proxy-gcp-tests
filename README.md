@@ -1,4 +1,4 @@
-# BigQuery Studio VDI Firewall Whitelist & Tenant Isolation Verification
+# BigQuery Studio VDI Firewall Allowlist & Tenant Isolation Verification
 
 This repository provides an automated testing harness and reference architecture for running **BigQuery Studio (Google Cloud Console)** in highly restrictive network environments (e.g. enterprise VDI workstations).
 
@@ -20,7 +20,7 @@ It demonstrates and validates:
 │   ├── mermaid_sequence_diagram.jpg
 │   └── mermaid_sequence_diagram.png
 ├── report/                                           # Comprehensive verification report
-│   └── BigQuery_Studio_VDI_Firewall_Whitelist_and_API_Verification_Report.md
+│   └── BigQuery_Studio_VDI_Firewall_Allowlist_and_API_Verification_Report.md
 └── scripts/                                          # Core executable scripts (4 test runners + launchers)
     ├── launch_chromium.py                            # Playwright Chromium browser launcher
     ├── launch_chrome.sh                              # Direct system Google Chrome launcher

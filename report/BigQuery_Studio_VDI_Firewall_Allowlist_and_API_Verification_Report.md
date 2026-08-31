@@ -1,4 +1,4 @@
-# BigQuery Studio VDI Firewall Whitelist & Dual-Header Verification Report
+# BigQuery Studio VDI Firewall Allowlist & Dual-Header Verification Report
 
 **Author:** Google Cloud Solution Architecture  
 **Date:** August 31, 2026  
