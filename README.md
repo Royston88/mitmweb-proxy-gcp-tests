@@ -19,16 +19,16 @@ It demonstrates and validates:
 ├── images/                                           # Architecture and sequence diagrams
 │   ├── mermaid_sequence_diagram.jpg
 │   └── mermaid_sequence_diagram.png
-├── scripts/                                          # Core executable scripts (4 test runners + launcher)
-│   ├── launch_chromium.py                            # Standalone Playwright Chromium browser launcher
-│   │
-│   ├── proxy_org_restriction.py                      # Mitmproxy addon: Injects X-Goog-Allowed-Resources
-│   ├── start_org_proxy.sh                            # Runner: GCP Organization Restriction proxy
-│   │
-│   ├── proxy_domain_restriction.py                   # Mitmproxy addon: Injects X-GoogApps-Allowed-Domains
-│   └── start_domain_proxy.sh                         # Runner: Google Workspace Domain Restriction proxy
-├── docs/                                             # [GITIGNORED] Local architecture & verification docs
-└── test/                                             # [GITIGNORED] Local automated test workflows
+├── report/                                           # Comprehensive verification report
+│   └── BigQuery_Studio_VDI_Firewall_Whitelist_and_API_Verification_Report.md
+└── scripts/                                          # Core executable scripts (4 test runners + launcher)
+    ├── launch_chromium.py                            # Standalone Playwright Chromium browser launcher
+    │
+    ├── proxy_org_restriction.py                      # Mitmproxy addon: Injects X-Goog-Allowed-Resources
+    ├── start_org_proxy.sh                            # Runner: GCP Organization Restriction proxy
+    │
+    ├── proxy_domain_restriction.py                   # Mitmproxy addon: Injects X-GoogApps-Allowed-Domains
+    └── start_domain_proxy.sh                         # Runner: Google Workspace Domain Restriction proxy
 ```
 
 ---
